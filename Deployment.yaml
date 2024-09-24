@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-gcp-lilutest
+  labels:
+    app.kubernetes.io/name: py-gcp-lilutest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: py-gcp-lilutest
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: py-gcp-lilutest
+    spec:
+      containers:
+      - name: py-gcp-lilutest
+        image: py-gcp-lilutest:v2
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "100Mi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: py-gcp-lilutest-svc
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: py-gcp-lilutest
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30007
