@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: py-gcp-lilutest
-        image: py-gcp-lilutest:v2
+        image: us-central1-docker.pkg.dev/wdtest-001/py-gcp/py-gcp-lilutest:v1
         ports:
         - containerPort: 8000
         resources:
